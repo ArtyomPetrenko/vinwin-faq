@@ -120,6 +120,24 @@ nav a.active {
   color: white;
 }
 
+#categoryNav a::before {
+  content: "💩";
+  font-size: 0.75em;
+  filter: saturate(0.45) brightness(1.2);
+  margin-right: 4px;
+}
+
+/* =====================
+   Poop icons
+   ===================== */
+.poop-icon {
+  display: inline-block;
+  filter: saturate(0.45) brightness(1.2);
+  line-height: 1;
+  vertical-align: middle;
+  font-size: 0.95em;
+}
+
 /* =====================
    Main & sections
    ===================== */
@@ -175,10 +193,11 @@ section h2 {
 }
 
 .question::after {
-  content: "▾";
-  color: var(--color-secondary);
+  content: "💩";
+  filter: saturate(0.45) brightness(1.2);
   transition: transform 0.25s ease;
   flex-shrink: 0;
+  font-size: 0.9em;
 }
 
 .question:hover {

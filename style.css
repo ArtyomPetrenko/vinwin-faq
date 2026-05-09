@@ -1,1 +1,265 @@
 /* VinWin FAQ — стили. Этап 3. */
+
+/* =====================
+   Design tokens
+   ===================== */
+:root {
+  --color-bg: #ffffff;
+  --color-text: #1a1a1a;
+  --color-secondary: #555555;
+  --color-accent: #4A90D9;
+  --color-accent-hover: #357ABD;
+  --color-border: #e5e5e5;
+  --color-bg-hover: #f5f8fd;
+  --font: -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-size-base: 17px;
+  --line-height: 1.65;
+  --max-width: 760px;
+  --radius: 8px;
+}
+
+/* =====================
+   Reset & base
+   ===================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+a {
+  color: var(--color-accent);
+}
+
+/* =====================
+   Header
+   ===================== */
+header {
+  width: 100%;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.site-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.mode-toggle {
+  border-radius: 20px;
+  border: 1.5px solid var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-bg);
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: var(--font);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.mode-toggle:hover {
+  background: var(--color-accent);
+  color: white;
+}
+
+/* =====================
+   Nav
+   ===================== */
+nav {
+  background: var(--color-bg-hover);
+  border-bottom: 1px solid var(--color-border);
+}
+
+#categoryNav {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0.6rem 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+#categoryNav a,
+nav a {
+  padding: 0.35rem 0.9rem;
+  border-radius: 20px;
+  color: var(--color-secondary);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+#categoryNav a:hover,
+nav a:hover,
+#categoryNav a.active,
+nav a.active {
+  background: var(--color-accent);
+  color: white;
+}
+
+/* =====================
+   Main & sections
+   ===================== */
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+section {
+  margin-bottom: 3rem;
+}
+
+section h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  color: var(--color-text);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-accent);
+}
+
+/* =====================
+   Accordion
+   ===================== */
+.qa-item {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.qa-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.question {
+  width: 100%;
+  text-align: left;
+  background: var(--color-bg);
+  border: none;
+  padding: 1rem 1.25rem;
+  font-size: var(--font-size-base);
+  font-family: var(--font);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-text);
+  transition: background 0.2s ease;
+}
+
+.question::after {
+  content: "▾";
+  color: var(--color-secondary);
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+.question:hover {
+  background: var(--color-bg-hover);
+}
+
+.answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 1.25rem;
+  color: var(--color-secondary);
+  transition: max-height 0.28s ease, padding 0.28s ease;
+}
+
+.answer p {
+  margin-bottom: 0.75rem;
+  line-height: var(--line-height);
+}
+
+.answer p:last-child {
+  margin-bottom: 0;
+}
+
+.answer a {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+/* Open state */
+.qa-item.open .answer {
+  max-height: 800px;
+  padding: 0.75rem 1.25rem 1.25rem;
+}
+
+.qa-item.open .question {
+  font-weight: 600;
+}
+
+.qa-item.open .question::after {
+  transform: rotate(180deg);
+}
+
+/* =====================
+   Display modes
+   ===================== */
+
+/* single — все секции видны */
+body.mode-single section {
+  display: block;
+}
+
+/* multi — только активная секция видна */
+body.mode-multi section {
+  display: none;
+}
+
+body.mode-multi section.active {
+  display: block;
+}
+
+/* кнопка в multi-режиме — инвертированная */
+body.mode-multi .mode-toggle {
+  background: var(--color-accent);
+  color: white;
+}
+
+/* =====================
+   Responsive
+   ===================== */
+@media (max-width: 600px) {
+  .header-inner {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  main {
+    padding: 1rem 0.75rem;
+  }
+
+  .question {
+    padding: 0.85rem 1rem;
+  }
+}

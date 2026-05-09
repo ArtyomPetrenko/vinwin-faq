@@ -219,6 +219,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   initAccordion();
   initNav();
+  initModeToggle();
 
   // Если уже mode-multi — активировать первую секцию
   if (getCurrentMode() === 'multi' && mainSections.length > 0) {
